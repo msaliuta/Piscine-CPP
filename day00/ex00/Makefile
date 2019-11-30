@@ -1,21 +1,38 @@
-NAME = megaphone
+NAME	=	megaphone
+CMPL	=	clang++
+CFLG	=	$(addprefix -W, all extra error)
+BNSD	=	bonus_part
+#SRCD	=	src
+#INCD	=	inc
+OBJD	=	obj
+#INCS	=	-I$(addprefix $(LIBD)/, $(INCD)) -I $(INCD)
 
-SRCS 	=	megaphone.cpp
+SRCS	=	megaphone.cpp\
 
-FLAGS = -Wall -Werror -Wextra
-
-OBJ = $(SRCS:.c=.o)
+OBJS	=	$(addprefix $(OBJD)/, $(SRCS:.cpp=.o))
 
 all: $(NAME)
 
-$(NAME): $(OBJ)
-		@clang++ -o $(NAME) $(FLAGS) $(OBJ)
-		@echo "megaphone done"
+$(NAME): $(OBJS)
+		@$(CMPL) $(CFLG) -o $(NAME) $^
+		@echo " megaphone is ready"
+
+$(OBJD)/%.o: %.cpp | $(OBJD)
+		@$(CMPL) $(CFLG) -c $< -o $@
+		@echo ".\c"
+
+$(OBJD):
+		@mkdir -p $(OBJD)
+		@echo "preparing \c"
 
 clean:
-		@rm -f $(OBJ)
+		@rm -rf $(OBJD)
 
 fclean: clean
 		@rm -f $(NAME)
 
-re: fclean all
+re:
+		@$(MAKE) fclean
+		@$(MAKE) all
+
+.PHONY: all clean fclean re
