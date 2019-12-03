@@ -6,59 +6,13 @@
 /*   By: msaliuta <msaliuta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/02 20:24:49 by msaliuta          #+#    #+#             */
-/*   Updated: 2019/12/02 23:10:38 by msaliuta         ###   ########.fr       */
+/*   Updated: 2019/12/03 21:01:37 by msaliuta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
 #include <string>
 #include "phonebook.hpp"
-
-Contact::Contact(void) 
-{
-	return;
-}
-
-Contact::~Contact(void) 
-{
-	return;
-}
-
-Info::Info(void) 
-{
-	return;
-}
-
-Info::~Info(void) 
-{
-	return;
-}
-
-void	Info::add_info(std::string input, int i) 
-{
-	if (i == 0)
-		this->_firstname = input;
-	else if (i == 1)
-		this->_lastname = input;
-	else if (i == 2)
-		this->_nickname = input;
-	else if (i == 3)
-		this->_login = input;
-	else if (i == 4)
-		this->_address = input;
-	else if (i == 5)
-		this->_email = input;
-	else if (i == 6)
-		this->_phone = input;
-	else if (i == 7)
-		this->_birthday = input;
-	else if (i == 8)
-		this->_meal = input;
-	else if (i == 9)
-		this->_underwear_color = input;
-	else if (i == 10)
-		this->_secret = input;
-}
 
 std::string	Info::get_info(int i) 
 {
@@ -81,21 +35,9 @@ std::string	Info::get_info(int i)
 	else if (i == 8)
 		return (this->_meal);
 	else if (i == 9)
-		return (this->_panties);
+		return (this->_underwear_color);
 	else if (i == 10)
 		return (this->_secret);
-	else if (i == 11)
-		return (this->_moment);
-	else if (i == 12)
-		return (this->_murder);
-	else if (i == 13)
-		return (this->_wtf);
-	else if (i == 14)
-		return (this->_tired);
-	else if (i == 15)
-		return (this->_traps);
-	else if (i == 16)
-		return (this->_last);
 	return ("ERROR");
 }
 
@@ -116,21 +58,21 @@ void		display_info(Contact *instance, int i)
 
 void		check_search(Contact *instance, std::string response)
 {
-	if (response == "1" && (instance->detail[0].get_info(0) != ""))
+	if (response == "1" && (instance->detail[0].get_firstname() != ""))
 		display_info(instance, 0);
-	else if (response == "2" && (instance->detail[1].get_info(0) != ""))
+	else if (response == "2" && (instance->detail[1].get_firstname() != ""))
 		display_info(instance, 1);
-	else if (response == "3" && (instance->detail[2].get_info(0) != ""))
+	else if (response == "3" && (instance->detail[2].get_firstname() != ""))
 		display_info(instance, 2);
-	else if (response == "4" && (instance->detail[3].get_info(0) != ""))
+	else if (response == "4" && (instance->detail[3].get_firstname() != ""))
 		display_info(instance, 3);
-	else if (response == "5" && (instance->detail[4].get_info(0) != ""))
+	else if (response == "5" && (instance->detail[4].get_firstname() != ""))
 		display_info(instance, 4);
-	else if (response == "6" && (instance->detail[5].get_info(0) != ""))
+	else if (response == "6" && (instance->detail[5].get_firstname() != ""))
 		display_info(instance, 5);
-	else if (response == "7" && (instance->detail[6].get_info(0) != ""))
+	else if (response == "7" && (instance->detail[6].get_firstname() != ""))
 		display_info(instance, 6);
-	else if (response == "8" && (instance->detail[7].get_info(0) != ""))
+	else if (response == "8" && (instance->detail[7].get_firstname() != ""))
 		display_info(instance, 7);
 	else
 		std::cout << "Sorry, that index number is invalid." << std::endl;
@@ -177,7 +119,7 @@ int			search_contact(Contact *instance, int *total)
 		i++;
 	}
 	std::cout << std::endl;
-	std::cout << "Which contact would you like to look? Please enter their index number." << std::endl;
+	std::cout << "Enter index." << std::endl;
 	std::cout << "< ";
 	std::getline(std::cin, response);
 	check_search(instance, response);
@@ -186,48 +128,47 @@ int			search_contact(Contact *instance, int *total)
 
 int			add_contact(Contact *instance, int *total)
 {
-	int i = 0;
-	std::string response = " ";
+	std::string response;
 
 	if (*total == 8)
 	{
-		std::cout << "Sorry you have too many contacts, you cannot add more." << std::endl;
+		std::cout << "Too many contacts." << std::endl;
 		return (0);
 	}
-	std::cout << "Please enter the following details for contact:" << std::endl;
+	std::cout << "Enter this details:" << std::endl;
 	std::cout << "> First Name: ";
 	std::getline(std::cin, response);
-	instance->detail[*total].add_info(response, i++);
+	instance->detail[*total].set_firstname(response);
 	std::cout << "> Last Name: ";
 	std::getline(std::cin, response);
-	instance->detail[*total].add_info(response, i++);
+	instance->detail[*total].set_lastname(response);
 	std::cout << "> Nickname: ";
 	std::getline(std::cin, response);
-	instance->detail[*total].add_info(response, i++);
+	instance->detail[*total].set_nickname(response);
 	std::cout << "> Login: ";
 	std::getline(std::cin, response);
-	instance->detail[*total].add_info(response, i++);
+	instance->detail[*total].set_login(response);
 	std::cout << "> Postal Address: ";
 	std::getline(std::cin, response);
-	instance->detail[*total].add_info(response, i++);
+	instance->detail[*total].set_address(response);
 	std::cout << "> Email Address: ";
 	std::getline(std::cin, response);
-	instance->detail[*total].add_info(response, i++);
+	instance->detail[*total].set_email(response);
 	std::cout << "> Phone Number: ";
 	std::getline(std::cin, response);
-	instance->detail[*total].add_info(response, i++);
+	instance->detail[*total].set_phone(response);
 	std::cout << "> Birthdate: ";
 	std::getline(std::cin, response);
-	instance->detail[*total].add_info(response, i++);
+	instance->detail[*total].set_birthday(response);
 	std::cout << "> Favorite Meal: ";
 	std::getline(std::cin, response);
-	instance->detail[*total].add_info(response, i++);
+	instance->detail[*total].set_meal(response);
 	std::cout << "> Underwear Color: ";
 	std::getline(std::cin, response);
-	instance->detail[*total].add_info(response, i++);
+	instance->detail[*total].set_panties(response);
 	std::cout << "> Darkest _darkest_secret: ";
 	std::getline(std::cin, response);
-	instance->detail[*total].add_info(response, i++);
+	instance->detail[*total].set_secret(response);
 	std::cout << " * * * " << std::endl;
 	*total = *total + 1;
 	return (0);
@@ -248,7 +189,7 @@ int			main(void)
 {
 	int i = 1;
 	int total = 0;
-	std::string input = " ";
+	std::string input;
 	Contact instance[8];
 
 	while (i)

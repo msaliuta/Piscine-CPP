@@ -6,12 +6,32 @@
 /*   By: msaliuta <msaliuta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/02 22:46:36 by msaliuta          #+#    #+#             */
-/*   Updated: 2019/12/02 23:10:42 by msaliuta         ###   ########.fr       */
+/*   Updated: 2019/12/03 20:59:04 by msaliuta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <string>
 #include "phonebook.hpp"
+
+Contact::Contact(void) 
+{
+	return;
+}
+
+Contact::~Contact(void) 
+{
+	return;
+}
+
+Info::Info(void) 
+{
+	return;
+}
+
+Info::~Info(void) 
+{
+	return;
+}
 
 std::string Info::get_firstname()
 {

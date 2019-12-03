@@ -6,7 +6,7 @@
 /*   By: msaliuta <msaliuta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/02 20:24:56 by msaliuta          #+#    #+#             */
-/*   Updated: 2019/12/02 23:05:13 by msaliuta         ###   ########.fr       */
+/*   Updated: 2019/12/03 20:54:39 by msaliuta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ class	Info {
 
 		void	add_info(std::string, int i);
 		std::string	get_info(int i);
+        
         std::string get_firstname();
         void set_firstname(std::string _firstname);
         std::string get_lastname();
