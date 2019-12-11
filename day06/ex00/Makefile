@@ -1,40 +1,34 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: akokoshk <akokoshk@student.42.fr>          +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2018/01/16 20:46:24 by akokoshk          #+#    #+#              #
-#    Updated: 2018/02/01 22:21:01 by akokoshk         ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
+NAME	=	convert
+CMPL	=	clang++
+CFLG	=	$(addprefix -W, all extra error)
+OBJD	=	obj
 
-# CLANG MAKE
+SRCS	=	main.cpp\
 
-NAME = scalarconversion
-CC = clang++
-FLAGS = -Wall -Wextra -Werror
-SOURCES = main.cpp
-OBJECTS = $(SOURCES:.cpp=.o)
+OBJS	=	$(addprefix $(OBJD)/, $(SRCS:.cpp=.o))
 
 all: $(NAME)
 
-%.o : %.cpp
-	@$(CC) $(FLAGS) -o $@ -c $<
+$(NAME): $(OBJS)
+		@$(CMPL) $(CFLG) -o $(NAME) $^
+		@echo " convert is ready"
 
-$(NAME): $(OBJECTS)
-	@$(CC) $(FLAGS) $(OBJECTS) -o $(NAME)
-	@echo "scalarconversion compiled"
+$(OBJD)/%.o: %.cpp | $(OBJD)
+		@$(CMPL) $(CFLG) -c $< -o $@
+		@echo ".\c"
 
-#@ar rc $(NAME) $(OBJECTS_PF) $(OBJECTS_LIB)
+$(OBJD):
+		@mkdir -p $(OBJD)
+		@echo "preparing \c"
 
 clean:
-	@rm -f $(OBJECTS)
-	@echo "scalarconversion cleaned"
+		@rm -rf $(OBJD)
 
 fclean: clean
-	@rm -f $(NAME)
-	@echo "scalarconversion fcleaned"
+		@rm -f $(NAME)
 
-re:	fclean all
+re:
+		@$(MAKE) fclean
+		@$(MAKE) all
+
+.PHONY: all clean fclean re
